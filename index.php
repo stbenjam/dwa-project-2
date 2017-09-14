@@ -65,7 +65,7 @@
                         <div class="col-sm-10">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="bingoPoints">Yes
+                                    <input class="form-check-input" type="checkbox" name="bingoPoints" <?= $bingo ? "checked" : ""?>>Yes
                                 </label>
                             </div>
                         </div>
@@ -74,6 +74,7 @@
                         <div class="col-sm-2"></div>
                         <div class="col-sm-10">
                             <button type="submit" class="btn btn-primary" name="calculate">Calculate</button>
+                            <a href="." class="btn btn-warning">Reset</a>
                         </div>
                     </div>
                 </form>

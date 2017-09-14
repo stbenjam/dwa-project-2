@@ -1,12 +1,19 @@
 <?php
+require('helpers.php');
 require('scrabbleValues.php');
 
 $showMessage = false;
 $showError = false;
 
-$word  = isset($_GET['yourWord']) ? $_GET['yourWord'] : "";
+$word  = strtolower(getValueFromGET('yourWord'));
+
+# Double/Triple word scores
+$multiplier = intval(getValueFromGET('multiplier'));
+$multiplier = ($multiplier == 0 ? 1 : $multiplier);
+
+# +50 for Word > 7 Characters
 $bingo = isset($_GET['bingoPoints']);
-$multiplier = isset($_GET['multiplier']) ? intval($_GET['multiplier']) : 1;
+$bingoPoints = ($bingo && strlen($word) >= 7) ? 50 : 0;
 
 # See if user gave us a word
 if (strlen($word) > 0) {
@@ -14,7 +21,7 @@ if (strlen($word) > 0) {
 
     # Split the word into letters, and get value for each letter
     foreach(str_split($_GET['yourWord']) as $letter) {
-        if(array_key_exists($letter, $scrabbleValues)) {
+        if (isset($scrabbleValues[$letter])) {
             # Add this letter to the score
             $score = $score + $scrabbleValues[$letter];
         } else {
@@ -27,9 +34,11 @@ if (strlen($word) > 0) {
         }
     }
 
-    $score = $score * $multiplier;
-    $showMessage = true;
-    $message = "Your word has a score of $score";
+    if(!$showError) {
+        $score = $score * $multiplier + $bingoPoints;
+        $showMessage = true;
+        $message = "Your word has a score of $score";
+    }
 } elseif (array_key_exists('calculate', $_GET)) {
     # User pressed submit button but didn't enter a word
     $showError = true;

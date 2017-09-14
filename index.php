@@ -18,7 +18,7 @@
                     <?php echo $message ?>
                 </div>
             <?php elseif ($showError) : ?>
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-danger" role="alert">
                     <?php echo $error ?>
                 </div>
             <?php endif; ?>
@@ -30,7 +30,7 @@
                     <div class="form-group row">
                         <label for="yourWord" class="col-sm-2 col-form-label">Your word</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="yourWord" name="yourWord" placeholder="Your word">
+                        <input type="text" class="form-control" id="yourWord" name="yourWord" placeholder="Your word" value="<?= $word ?>">
                         </div>
                     </div>
 
@@ -40,19 +40,19 @@
                             <div class="col-sm-10">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="bonusPoints" id="bonusPoints1" value="none" checked>
+                                    <input class="form-check-input" type="radio" name="multiplier" id="multiplier1" value="1" <?= $multiplier == 1 ? 'checked' : '' ?>>
                                         None
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="bonusPoints" id="bonusPoints2" value="double">
+                                        <input class="form-check-input" type="radio" name="multiplier" id="multiplier2" value="2" <?= $multiplier == 2 ? 'checked' : '' ?>>
                                         Double
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="bonusPoints" id="bonusPoints3" value="triple">
+                                        <input class="form-check-input" type="radio" name="multiplier" id="multiplier3" value="3" <?= $multiplier == 3 ? 'checked' : '' ?>>
                                         Triple
                                     </label>
                                 </div>
@@ -73,7 +73,7 @@
                     <div class="form-group row">
                         <div class="col-sm-2"></div>
                         <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Calculate</button>
+                            <button type="submit" class="btn btn-primary" name="calculate">Calculate</button>
                         </div>
                     </div>
                 </form>

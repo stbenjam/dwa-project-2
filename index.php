@@ -6,6 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <link rel="stylesheet" href="p2.css">
     </head>
     <body>
         <div class="container">
@@ -27,10 +28,10 @@
 
             <div class="page-header">
                 <form>
-                    <div class="form-group row">
+                    <div class="form-group row required">
                         <label for="yourWord" class="col-sm-2 col-form-label">Your word</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="yourWord" name="yourWord" placeholder="Your word" value="<?= $word ?>">
+                        <input type="text" class="form-control <?= $wordInvalid ? "is-invalid" : "" ?>" id="yourWord" name="yourWord" placeholder="Your word" value="<?= $word ?>">
                         </div>
                     </div>
 
@@ -61,7 +62,7 @@
                     </fieldset>
 
                     <div class="form-group row">
-                        <div class="col-sm-2">Include 50 point "bingo"</div>
+                        <label for="bingoPoints" class="col-sm-2 col-form-label">Include 50 point "bingo"</label>
                         <div class="col-sm-10">
                             <div class="form-check">
                                 <label class="form-check-label">

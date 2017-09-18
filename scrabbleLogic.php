@@ -4,6 +4,7 @@ require('scrabbleValues.php');
 
 $showMessage = false;
 $showError = false;
+$wordInvalid = false;
 
 $word  = strtolower(getValueFromGET('yourWord'));
 
@@ -28,6 +29,7 @@ if (strlen($word) > 0) {
             # If user gave us an invalid letter, then abort
             # and let them know:
 
+            $wordInvalid = true;
             $showError = true;
             $error = "Invalid scrabble tile: $letter";
             break;
@@ -41,6 +43,7 @@ if (strlen($word) > 0) {
     }
 } elseif (array_key_exists('calculate', $_GET)) {
     # User pressed submit button but didn't enter a word
+    $wordInvalid = true;
     $showError = true;
     $error = "Please enter your word in the form.";
 }

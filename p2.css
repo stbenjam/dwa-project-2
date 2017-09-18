@@ -1,0 +1,11 @@
+.form-group.required .col-form-legend:after {
+    content: "*";
+    color: red;
+}
+
+.form-group.required .col-form-label:after {
+    content: "*";
+    color: red;
+}
+
+

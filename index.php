@@ -66,7 +66,7 @@
                         <div class="col-sm-10">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="bingoPoints" <?= $bingo ? "checked" : ""?>>Yes
+                                    <input class="form-check-input" id="bingoPoints" type="checkbox" name="bingoPoints" <?= $bingo ? "checked" : ""?>>Yes
                                 </label>
                             </div>
                         </div>

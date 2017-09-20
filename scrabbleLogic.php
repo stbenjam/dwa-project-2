@@ -1,6 +1,7 @@
 <?php
 require('helpers.php');
 require('scrabbleValues.php');
+require('dictionaryAPI.php');
 
 $showMessage = false;
 $showError = false;
@@ -36,10 +37,19 @@ if (strlen($word) > 0) {
         }
     }
 
+    # Score calculated
     if(!$showError) {
-        $score = $score * $multiplier + $bingoPoints;
-        $showMessage = true;
-        $message = "Your word has a score of $score";
+
+        # Let's make sure it's a valid word
+        if(isValidWord($word)) {
+            $score = $score * $multiplier + $bingoPoints;
+            $showMessage = true;
+            $message = "Your word has a score of $score";
+        } else {
+            $wordInvalid = true;
+            $showError = true;
+            $error = "'$word' is not valid in Scrabble.";
+        }
     }
 } elseif (array_key_exists('calculate', $_GET)) {
     # User pressed submit button but didn't enter a word

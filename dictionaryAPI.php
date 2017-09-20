@@ -5,7 +5,7 @@
 
 function isValidWord($word) {
     # Read API key from file:
-    $API_KEY = trim(file_get_contents("api.key"));
+    $API_KEY = trim(file_get_contents("../api.key"));
 
     # API URL:
     $API_URL = "http://www.wordgamedictionary.com/api/v1/references/scrabble/$word?key=$API_KEY";

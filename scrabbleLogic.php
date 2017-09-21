@@ -22,7 +22,7 @@ if (strlen($word) > 0) {
     $score = 0;
 
     # Split the word into letters, and get value for each letter
-    foreach(str_split($_GET['yourWord']) as $letter) {
+    foreach(str_split($word) as $letter) {
         if (isset($scrabbleValues[$letter])) {
             # Add this letter to the score
             $score = $score + $scrabbleValues[$letter];

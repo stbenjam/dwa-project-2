@@ -5,6 +5,7 @@ require('DictionaryAPI.php');
 
 use DWA\Form;
 use DWA\ScrabbleWord;
+use DWA\DictionaryAPI;
 
 # Path to API key
 $API_KEYFILE = "../api.key";

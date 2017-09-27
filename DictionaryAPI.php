@@ -2,6 +2,8 @@
 # This class uses the Word Game Dictionary API to see if a word is valid for
 # Scrabble.
 
+namespace DWA;
+
 class DictionaryAPI {
     private $apiKey;
 

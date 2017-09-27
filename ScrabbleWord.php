@@ -49,6 +49,7 @@ class ScrabbleWord {
             $score = $score + $this->scrabbleValues[$letter];
         }
 
+        # Calculate final score:
         $score = $score * $multiplier + $bingoPoints;
 
         return $score;

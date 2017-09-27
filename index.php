@@ -14,13 +14,17 @@
                 <h1 style="text-align: center;">Scrabble Calculator</h1>
             </div>
 
-            <?php if ($showMessage) : ?>
-                <div class="alert alert-success" role="alert">
-                    <?php echo $message ?>
-                </div>
-            <?php elseif ($showError) : ?>
+            <?php if (!empty($errors)) : ?>
                 <div class="alert alert-danger" role="alert">
-                    <?php echo $error ?>
+                    <ul>
+                        <?php foreach ($errors as $error) : ?>
+                            <li><?= $error ?></li>
+                        <?php endforeach ?>
+                    </ul>
+                </div>
+            <?php elseif ($form->isSubmitted()) : ?>
+                <div class="alert alert-success" role="alert">
+                    Your word has a score of <?= $score ?>.
                 </div>
             <?php endif; ?>
 
@@ -31,7 +35,7 @@
                     <div class="form-group row required">
                         <label for="yourWord" class="col-sm-2 col-form-label">Your word</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control <?= $wordInvalid ? "is-invalid" : "" ?>" id="yourWord" name="yourWord" placeholder="Your word" value="<?= $word ?>">
+                        <input type="text" class="form-control id="yourWord" name="yourWord" placeholder="Your word" value="<?= $form->prefill('yourWord') ?>">
                         </div>
                     </div>
 
@@ -41,19 +45,19 @@
                             <div class="col-sm-10">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="multiplier" id="multiplier1" value="1" <?= $multiplier == 1 ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="radio" name="multiplier" id="multiplier1" value="1" <?= $form->checked('multiplier', 1) ?> <?= $form->get('multiplier') ? '' : 'checked' ?>>
                                         None
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="multiplier" id="multiplier2" value="2" <?= $multiplier == 2 ? 'checked' : '' ?>>
+                                        <input class="form-check-input" type="radio" name="multiplier" id="multiplier2" value="2" <?= $form->checked('multiplier', 2) ?>>
                                         Double
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="multiplier" id="multiplier3" value="3" <?= $multiplier == 3 ? 'checked' : '' ?>>
+                                        <input class="form-check-input" type="radio" name="multiplier" id="multiplier3" value="3" <?= $form->checked('multiplier', 3) ?>>
                                         Triple
                                     </label>
                                 </div>
@@ -66,7 +70,7 @@
                         <div class="col-sm-10">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" id="bingoPoints" type="checkbox" name="bingoPoints" <?= $bingo ? "checked" : ""?>>Yes
+                                    <input class="form-check-input" id="bingoPoints" type="checkbox" name="bingoPoints" <?= $form->checked('bingoPoints') ?>>Yes
                                 </label>
                             </div>
                         </div>

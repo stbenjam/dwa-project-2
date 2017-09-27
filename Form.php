@@ -55,6 +55,22 @@ class Form
         return $value;
     }
 
+    /**
+     * If $value is set, then checks if $name == $value, and prints 'checked'
+     * Otherwise just sees if $name is set
+     */
+    public function checked($name, $value = null)
+    {
+        $result = false;
+
+        if($value != null) {
+            $result = ($this->get($name) == $value) ? 'checked' : '';
+        } else {
+            $result = isset($this->request[$name]) ? 'checked' : '';
+        }
+
+        return $result;
+    }
 
     /**
     * Use in display files to prefill the values of fields if those values are in the request

@@ -1,61 +1,26 @@
 <?php
-require('helpers.php');
-require('scrabbleValues.php');
+require('Form.php');
+require('ScrabbleWord.php');
 require('dictionaryAPI.php');
 
-$showMessage = false;
-$showError = false;
-$wordInvalid = false;
+use DWA\Form;
+use DWA\ScrabbleWord;
 
-$word  = strtolower(getValueFromGET('yourWord'));
+$form = new Form($_GET);
 
-# Double/Triple word scores
-$multiplier = intval(getValueFromGET('multiplier'));
-$multiplier = ($multiplier == 0 ? 1 : $multiplier);
+if ($form->isSubmitted()) {
+    $bingo = $form->isChosen('bingoPoints');
+    $multiplier = intval($form->get('multiplier', 1));
+    $word = strtolower(trim($form->get('yourWord', '')));
 
-# +50 for Word > 7 Characters
-$bingo = isset($_GET['bingoPoints']);
-$bingoPoints = ($bingo && strlen($word) >= 7) ? 50 : 0;
+    $errors = $form->validate([
+        'yourWord'   => 'alpha|required',
+        'multiplier' => 'min:0|max:4',
+    ]);
 
-# See if user gave us a word
-if (strlen($word) > 0) {
-    $score = 0;
-
-    # Split the word into letters, and get value for each letter
-    foreach(str_split($word) as $letter) {
-        if (isset($scrabbleValues[$letter])) {
-            # Add this letter to the score
-            $score = $score + $scrabbleValues[$letter];
-        } else {
-            # If user gave us an invalid letter, then abort
-            # and let them know:
-
-            $wordInvalid = true;
-            $showError = true;
-            $error = "Invalid scrabble tile: $letter";
-            break;
-        }
+    if(!$form->hasErrors) {
+        $scrabbleWord = new ScrabbleWord($word);
+        $score = $scrabbleWord->score($multiplier, $bingo);
     }
-
-    # Score calculated
-    if(!$showError) {
-
-        # Let's make sure it's a valid word
-        if(isValidWord($word)) {
-            $score = $score * $multiplier + $bingoPoints;
-            $showMessage = true;
-            $message = "Your word has a score of $score";
-        } else {
-            $wordInvalid = true;
-            $showError = true;
-            $error = "'$word' is not valid in Scrabble.";
-        }
-    }
-} elseif (array_key_exists('calculate', $_GET)) {
-    # User pressed submit button but didn't enter a word
-    $wordInvalid = true;
-    $showError = true;
-    $error = "Please enter your word in the form.";
 }
-
 ?>

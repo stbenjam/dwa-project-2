@@ -35,7 +35,7 @@
                     <div class="form-group row required">
                         <label for="yourWord" class="col-sm-2 col-form-label">Your word</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control id="yourWord" name="yourWord" placeholder="Your word" value="<?= $form->prefill('yourWord') ?>">
+                        <input type="text" class="form-control" id="yourWord" name="yourWord" placeholder="Your word" value="<?= $form->prefill('yourWord') ?>">
                         </div>
                     </div>
 

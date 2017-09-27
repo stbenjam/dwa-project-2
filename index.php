@@ -66,11 +66,22 @@
                     </fieldset>
 
                     <div class="form-group row">
-                        <label for="bingoPoints" class="col-sm-2 col-form-label">Include 50 point "bingo"</label>
+                        <legend class="col-form-legend col-sm-2">Additional Options </legend>
                         <div class="col-sm-10">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" id="bingoPoints" type="checkbox" name="bingoPoints" <?= $form->checked('bingoPoints') ?>>Yes
+                                    <input class="form-check-input" id="dictVerify" type="checkbox" name="dictVerify" <?= $form->checked('dictVerify') ?>> Validate word in dictionary
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <span class="col-sm-2 col-form-label"></span>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" id="bingoPoints" type="checkbox" name="bingoPoints" <?= $form->checked('bingoPoints') ?>> Include 50 point "bingo"
                                 </label>
                             </div>
                         </div>
